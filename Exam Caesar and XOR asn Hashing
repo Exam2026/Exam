@@ -150,3 +150,59 @@ def solution(msg: str, n: int) -> str:
 22)Salted SHA-256
 def solution(salt: str, pw: str) -> str:
     return hashlib.sha256((salt + pw).encode()).hexdigest()
+
+1)SHA-1 Numeric Brute (Prefix)
+def solution(target: str, prefix: str) -> int:
+    for i in range(10000000):
+        if hashlib.sha1((prefix + str(i)).encode()).hexdigest() == target:
+            return i
+          
+
+2)MD5 'pin' Brute (n < 100000)
+def solution(target: str) -> int:
+    for i in range(100000):
+        if hashlib.md5(("pin" + str(i)).encode()).hexdigest() == target:
+            return i
+      
+
+3)SHA-1 4-char Lowercase Brute
+def solution(target: str) -> str:
+    for t in itertools.product(string.ascii_lowercase, repeat=4):
+        w ="".join(t)
+        if hashlib.sha1(w.encode()).hexdigest() == target:
+            return w
+    return 
+
+
+4)MD5 3-char abc123 Brute
+def solution(target: str) -> str:
+    for t in itertools.product("abc123", repeat=3):
+        w = "".join(t)
+        if hashlib.md5(w.encode()).hexdigest() == target:
+            return w
+    return ""
+
+5)Salted 4-digit PIN Brute
+def solution(target: str, salt: str) -> str:
+    for n in range(10000):
+        pin = "%04d" % n
+        if hashlib.sha256((salt + pin).encode()).hexdigest() == target:
+            return pin
+    return ""
+  
+6) 4-digit PIN SHA-256 Brute
+def solution(target: str) -> str:
+    for n in range(10000):
+        pin = "%04d" % n
+        if hashlib.sha256(pin.encode()).hexdigest() == target:
+            return pin
+    return ""
+
+
+7)SHA-1 Dictionary Attack
+def solution(target: str, words: list[str]) -> str:
+    for w in words:
+        if hashlib.sha1(w.encode()).hexdigest() == target:
+            return w
+    return ""
+
