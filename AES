@@ -67,7 +67,7 @@ def solution(key: str, plaintext: str) -> str:
     return c.hex()
 
 AES-CTR Decryption
-def solution(key, nonce, ciphertext):
+def solution(key: str, nonce: str, ciphertext: str) -> str:
     key = bytes.fromhex(key)
     nonce = bytes.fromhex(nonce)
     c = bytes.fromhex(ciphertext)
