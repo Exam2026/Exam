@@ -1,0 +1,17 @@
+AES-ECB Decryption
+def solution(key: str, ciphertext: str) -> str:
+    key = bytes.fromhex(key)
+    c = bytes.fromhex(ciphertext)
+    p = b''
+    for i in range(0, len(c), 16):
+        p += aes_decrypt_block(key, c[i:i+16])
+    return pkcs7_unpad(p).decode()
+
+AES-ECB Encryption
+def solution(key: str, plaintext: str) -> str:
+    key = bytes.fromhex(key)
+    p = pkcs7_pad(plaintext.encode())
+    c = b''
+    for i in range(0, len(p), 16):
+        c += aes_encrypt_block(key, p[i:i+16])
+    return c.hex()
