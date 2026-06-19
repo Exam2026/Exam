@@ -1,7 +1,25 @@
-1)Caesar Decrypt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Caesar Decrypt
 def solution(k: int, text: str) -> str:
     s = ""
-
     for c in text:
         if 'a' <= c <= 'z':
             s += chr(ord('a') + (ord(c) - ord('a') - k) % 26)
@@ -9,14 +27,11 @@ def solution(k: int, text: str) -> str:
             s += chr(ord('A') + (ord(c) - ord('A') - k) % 26)
         else:
             s += c
-
     return s
 
-
-2)Caesar Encrypt
+Caesar Encrypt
 def solution(k: int, text: str) -> str:
     s = ""
-
     for c in text:
         if 'a' <= c <= 'z':
             s += chr(ord('a') + (ord(c) - ord('a') + k) % 26)
@@ -24,10 +39,9 @@ def solution(k: int, text: str) -> str:
             s += chr(ord('A') + (ord(c) - ord('A') + k) % 26)
         else:
             s += c
-
     return s
 
- 3)Caesar Brute Force with Crib
+ Caesar Brute Force with Crib
  def solution(ct: str, crib: str) -> str:
     for k in range(26):
         s = ""
@@ -38,43 +52,38 @@ def solution(k: int, text: str) -> str:
                 s += chr((ord(c)-65-k)%26+65)
             else:
                 s += c
-
         if crib.lower() in s.lower():
             return s
-
     return ""
 
-
-4)Recover Caesar Shift
+Recover Caesar Shift
 def solution(pt: str, ct: str) -> int:
     return (ord(ct[0].upper()) - ord(pt[0].upper())) % 26
 
-
-5)Byte-Range Caesar 
+Byte-Range Caesar 
 def solution(k: int, hex_data: str) -> str:
   data = bytes.fromhex(hex_data)
   return bytes((b - k) % 256 for b in data).decode()
 
-6)One-Time Pad Decrypt
+One-Time Pad Decrypt
 def solution(hex_ct: str, hex_key: str) -> str:
     ct = bytes.fromhex(hex_ct)
     key = bytes.fromhex(hex_key)
   return bytes(a ^ b for a, b in zip(ct, key)).decode()
 
-7)One-Time Pad Encrypt
+One-Time Pad Encrypt
 def solution(pt: str, hex_key: str) -> str:
     p = pt.encode()
     key = bytes.fromhex(hex_key)
     return bytes(a ^ b for a, b in zip(p, key)).hex()
 
-8)Recover the One-Time Pad
+Recover the One-Time Pad
 def solution(pt: str, hex_ct: str) -> str:
-
     p = pt.encode()
     ct = bytes.fromhex(hex_ct)
     return bytes(a ^ b for a, b in zip(p, ct)).hex()
 
-9)Break Single-byte XOR
+Break Single-byte XOR
 def solution(hex_ct: str) -> str:
     b = bytes.fromhex(hex_ct)
     best, best_s = "", -1
@@ -88,68 +97,20 @@ def solution(hex_ct: str) -> str:
             best = p
     return best.decode()
 
-10)Repeating-Key XOR Decrypt
+Repeating-Key XOR Decrypt
 def solution(key: str, hex_ct: str) -> str:
-
     k = key.encode()
     ct = bytes.fromhex(hex_ct)
     return bytes(b ^ k[i % len(k)] for i, b in enumerate(ct)).decode()
 
-11)Repeating-Key XOR Encrypt 
+Repeating-Key XOR Encrypt 
 def solution(key: str, pt: str) -> str:
     k = key.encode()
     p = pt.encode()
     return bytes(b ^ k[i % len(k)] for i, b in enumerate(p)).hex()
 
-12)Recover XOR Key from Known Prefix
+Recover XOR Key from Known Prefix
 def solution(hex_ct: str, prefix: str) -> str:
     ct = bytes.fromhex(hex_ct)
     pref = prefix.encode()
     return bytes(ct[i] ^ pref[i] for i in range(len(pref))).decode()
-13)MD5 and SHA-1 Digests
-def solution(msg: str) -> list[str]:
-    m = msg.encode()
-    return [hashlib.md5(m).hexdigest(), hashlib.sha1(m).hexdigest()]
-
-14)SHA-256 Digest
-def solution(msg: str) -> str:
-    return hashlib.sha256(msg.encode()).hexdigest()
-
-15)SHA-512 Digest
-def solution(msg: str) -> str:
-    return hashlib.sha512(msg.encode()).hexdigest()
-
-16)Double SHA-1
-def solution(key: str, plaintext: str) -> str:
-    return hashlib.sha1(hashlib.sha1(msg.encode()).digest()).hexdigest()
-
-17)SHA-256 of Hex-Encoded Bytes
-def solution(hex_data: str) -> str:
-    return hashlib.sha256(bytes.fromhex(hex_data)).hexdigest()
-
-18)HMAC-MD5 (String Key)
-def solution(key: str, msg: str) -> str:
-    return hmac.new(key.encode(), msg.encode(), hashlib.md5).hexdigest()
-
-19)Identify Hash Algorithm by Length
-def solution(digest: str) -> str:
-    return {32: "md5", 40: "sha1", 64: "sha256"}[len(digest)]
-
-20)Concatenated MD5 and SHA-1
-def solution(msg: str) -> str:
-    m = msg.encode()
-    return hashlib.md5(m).hexdigest() + hashlib.sha1(m).hexdigest()
-
-21)Iterated SHA-256 (Key Stretching)
-def solution(msg: str, n: int) -> str:
-    x = msg.encode()
-    for _ in range(n):
-        x = hashlib.sha256(x).digest()
-    return x.hex()
-
-22)Salted SHA-256
-def solution(salt: str, pw: str) -> str:
-    return hashlib.sha256((salt + pw).encode()).hexdigest()
-
-
-
