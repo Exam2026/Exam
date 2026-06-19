@@ -1,3 +1,22 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Detect ECB vs CBC
 def solution(ciphertext: str) -> str:
     b = [ciphertext[i:i+32] for i in range(0, len(ciphertext), 32)]
